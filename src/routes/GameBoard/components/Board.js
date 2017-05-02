@@ -4,16 +4,16 @@ import Piece from './Piece'
 
 export const Board = (props) => {
 
-	let new_grid = [
-		[0,0,0,0,0,0],
-		[0,0,0,0,0,0],
-		[0,0,0,0,0,0],
-		[0,0,0,0,0,0],
-		[0,0,0,0,0,0],
-		[0,0,0,0,0,0],
-		[0,0,0,0,0,0]
-	]
+	const new_grid = props.grid
 
+	let currentPlayer = () => {
+		return (
+			<h4>{props.currentPlayer}</h4>
+		)
+	}
+	/**
+	* Build out an empty board
+	**/
 	let buildGameBoard = () => {
 		return (
 				new_grid.map((column, y) => {
@@ -22,22 +22,23 @@ export const Board = (props) => {
 							{column.map((cell, x) => {
 								return (
 									<Piece
-										key={`piece-${x}-${y}`}										
+										key={`piece-${x}-${y}`}
 										x={x}
 										y={y}
+										addPiece={props.addPiece}
+										currentPlayer={props.currentPlayer}
 									/>
 								)
 							})}
 						</div>
 					)
 				})
-
 		)
 	}
 
 	return (
 		<div>
-			<h1>Connect Four game board will go here!</h1>
+			{currentPlayer()}
 			{buildGameBoard()}
 		</div>
 	)
