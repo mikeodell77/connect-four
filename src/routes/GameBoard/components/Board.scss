@@ -1,0 +1,14 @@
+$numColumns: 7;
+
+.piece {
+	border: none;
+  background: #dddddd;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+}
+
+.columns {
+	float: left;
+	width: 100% / $numColumns
+}
