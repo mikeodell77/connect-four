@@ -12,9 +12,21 @@ $cell-player-blue: #231858;
   border-radius: 50%;
 }
 
+.piece-color-red {
+	background-color: $cell-player-red;
+}
+
+.piece-color-blue {
+	background-color: $cell-player-blue;
+}
+
 .columns {
 	float: left;
 	width: 100% / $numColumns;
+}
+
+.connect-container {
+	width: 976px
 }
 
 

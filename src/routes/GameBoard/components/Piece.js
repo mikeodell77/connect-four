@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 import './Board.scss'
 
 export const Piece = (props) => {
@@ -10,11 +11,18 @@ export const Piece = (props) => {
 		props.addPiece(columnIndex, rowIndex, currentPlayer)
 	}
 
+	let cellClasses = classnames({
+		'piece': true,
+		'piece-color-red': (props.grid[props.y][props.x] == 1 ? true : false),
+		'piece-color-blue': (props.grid[props.y][props.x] == 2 ? true : false)
+	})
+
 	return (
 		<button
-			className="piece piece-hover"
+			className={cellClasses}
 			id={`piece-${props.x}-${props.y}`}
 			onClick={(e) => handleAddPiece()}>
+			{props.grid[props.y][props.x] > 0 ? 'disabled' : ''}
 		</button>
 	)
 }

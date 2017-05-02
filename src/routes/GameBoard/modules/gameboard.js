@@ -6,8 +6,8 @@ import update from 'react-addons-update';
 // export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 // export const COUNTER_DOUBLE_ASYNC = 'COUNTER_DOUBLE_ASYNC'
 export const ADD_PIECE = 'ADD_PIECE'
-export const RED = 'RED'
-export const BLUE = 'BLUE'
+export const RED = 'red'
+export const BLUE = 'blue'
 
 const NEW_GRID = [
   [0,0,0,0,0,0],
@@ -71,12 +71,14 @@ const ACTION_HANDLERS = {
       return arr.slice(0)
     })
 
-    // in the newly cloned array, update the value
-    newGrid[action.payload.columnIndex][action.payload.rowIndex] = 1
     const currentPlayer = state.currentPlayer
-    const updatedCurrentPlayer = currentPlayer === RED ? BLUE : RED
+    const nextPlayer = currentPlayer === RED ? BLUE : RED
+    // in the newly cloned array, update the value
+    const pieceValue = currentPlayer === RED ? 1 : 2
+    newGrid[action.payload.columnIndex][action.payload.rowIndex] = pieceValue
 
-    return { ...state, grid: newGrid, currentPlayer: updatedCurrentPlayer}
+
+    return { ...state, grid: newGrid, currentPlayer: nextPlayer}
   }
 }
 

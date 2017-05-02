@@ -16,23 +16,26 @@ export const Board = (props) => {
 	**/
 	let buildGameBoard = () => {
 		return (
-				new_grid.map((column, y) => {
-					return (
-						<div className="columns" key={`column-${y}`}>
-							{column.map((cell, x) => {
-								return (
-									<Piece
-										key={`piece-${x}-${y}`}
-										x={x}
-										y={y}
-										addPiece={props.addPiece}
-										currentPlayer={props.currentPlayer}
-									/>
-								)
-							})}
-						</div>
-					)
-				})
+				<div className="connect-container">
+					{new_grid.map((column, y) => {
+						return (
+							<div className="columns" key={`column-${y}`}>
+								{column.map((cell, x) => {
+									return (
+										<Piece
+											key={`piece-${x}-${y}`}
+											x={x}
+											y={y}
+											addPiece={props.addPiece}
+											currentPlayer={props.currentPlayer}
+											grid={props.grid}
+										/>
+									)
+								})}
+							</div>
+						)
+					})}
+				</div>
 		)
 	}
 
