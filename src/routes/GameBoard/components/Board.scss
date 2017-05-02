@@ -1,4 +1,8 @@
 $numColumns: 7;
+$cell-empty: #eeeeee;
+$cell-empty-hover: #dddddd;
+$cell-player-red: #801515;
+$cell-player-blue: #231858;
 
 .piece {
 	border: none;
@@ -10,5 +14,10 @@ $numColumns: 7;
 
 .columns {
 	float: left;
-	width: 100% / $numColumns
+	width: 100% / $numColumns;
+}
+
+
+.piece-hover {
+	background-color: $cell-empty-hover;
 }

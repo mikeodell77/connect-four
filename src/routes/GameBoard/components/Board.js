@@ -22,7 +22,7 @@ export const Board = (props) => {
 							{column.map((cell, x) => {
 								return (
 									<Piece
-										key={`piece-${x}-${y}`}
+										key={`piece-${x}-${y}`}										
 										x={x}
 										y={y}
 									/>

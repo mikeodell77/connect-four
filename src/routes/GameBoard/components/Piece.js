@@ -4,7 +4,8 @@ import './Board.scss'
 export const Piece = (props) => {
 	return (
 		<button
-			className="piece">
+			className="piece piece-hover"
+			id={`piece-${props.x}-${props.y}`}>
 		</button>
 	)
 }
