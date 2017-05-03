@@ -39,6 +39,7 @@ export const Board = (props) => {
 											addPiece={props.addPiece}
 											currentPlayer={props.currentPlayer}
 											grid={props.grid}
+											insertedPieces={props.insertedPieces}
 										/>
 									)
 								})}

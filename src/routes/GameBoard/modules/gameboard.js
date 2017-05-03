@@ -30,29 +30,12 @@ const NEW_GRID = [
     creating async actions, especially when combined with redux-thunk! */
 export const addPiece = (columnIndex, rowIndex, player) => {
   return (dispatch, getState) => {
-    console.log('We are adding pieces!')
-    console.log('What is column index : ', columnIndex)
-    console.log('What is piece : ', rowIndex)
-
     dispatch({
       type: ADD_PIECE,
       payload: { columnIndex: columnIndex, rowIndex: rowIndex, currentPlater: player }
     })
   }
 }
-// export const doubleAsync = () => {
-//   return (dispatch, getState) => {
-//     return new Promise((resolve) => {
-//       setTimeout(() => {
-//         dispatch({
-//           type    : COUNTER_DOUBLE_ASYNC,
-//           payload : getState().counter
-//         })
-//         resolve()
-//       }, 200)
-//     })
-//   }
-// }
 
 export const actions = {
   addPiece
@@ -74,6 +57,7 @@ const ACTION_HANDLERS = {
     // be updated. Otherwise, it stays
     let nextPlayer = state.currentPlayer
     let message = ''
+    let insertedPieces = state.insertedPieces
 
     /**
     * We actually want to put the 'piece' at the bottom of the colomn.
@@ -94,6 +78,9 @@ const ACTION_HANDLERS = {
       nextPlayer = nextPlayer === RED ? BLUE : RED
       const pieceValue = state.currentPlayer === RED ? 1 : 2
       column[cellIndex] = pieceValue
+
+      // increment total inserted pieces
+      insertedPieces = insertedPieces + 1
     } else {
       message = 'There are no more slots left in this column. Please pick another column.'
     }
@@ -103,16 +90,21 @@ const ACTION_HANDLERS = {
       message = 'We have a winner!!!!'
     }
 
+    if ( insertedPieces === 42 ) {
+      message = 'TIE'
+    }
+
     console.log('Found the following open cell : ', cellIndex)
 
-    return { ...state, grid: newGrid, currentPlayer: nextPlayer, message: message}
+
+    return { ...state, grid: newGrid, currentPlayer: nextPlayer, message: message, insertedPieces: insertedPieces }
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { grid: NEW_GRID, currentPlayer: RED }
+const initialState = { grid: NEW_GRID, currentPlayer: RED, insertedPieces: 0 }
 export function gameboardReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
