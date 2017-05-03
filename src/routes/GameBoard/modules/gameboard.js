@@ -63,22 +63,43 @@ export const actions = {
 const ACTION_HANDLERS = {
   [ADD_PIECE] : (state, action) => {
 
-    const oldGrid = state.grid
-
     // we need a deep copy of the grid, to retain
     // old values
-    let newGrid = oldGrid.map((arr) => {
+    let newGrid = state.grid.map((arr) => {
       return arr.slice(0)
     })
 
-    const currentPlayer = state.currentPlayer
-    const nextPlayer = currentPlayer === RED ? BLUE : RED
-    // in the newly cloned array, update the value
-    const pieceValue = currentPlayer === RED ? 1 : 2
-    newGrid[action.payload.columnIndex][action.payload.rowIndex] = pieceValue
+    // if we are able to place a piece, this will
+    // be updated. Otherwise, it stays
+    let nextPlayer = state.currentPlayer
+    let message = ''
 
+    /**
+    * We actually want to put the 'piece' at the bottom of the colomn.
+    * loop through the rows for the selected column. find the first one
+    * that has been selected and backup one.
+    */
+    let column = newGrid[action.payload.columnIndex]
+    let cellIndex = -1
 
-    return { ...state, grid: newGrid, currentPlayer: nextPlayer}
+    column.forEach((columnPiece, i) => {
+      if (columnPiece === 0) {
+        cellIndex = i
+      }
+    })
+
+    if (cellIndex >= 0) {
+      // we have successfully placed a piece, so toggle the next player
+      nextPlayer = nextPlayer === RED ? BLUE : RED
+      const pieceValue = state.currentPlayer === RED ? 1 : 2
+      column[cellIndex] = pieceValue
+    } else {
+      message = 'There are no more slots left in this column. Please pick another column.'
+    }
+
+    console.log('Found the following open cell : ', cellIndex)
+
+    return { ...state, grid: newGrid, currentPlayer: nextPlayer, message: message}
   }
 }
 

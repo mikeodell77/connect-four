@@ -3,13 +3,24 @@ $cell-empty: #eeeeee;
 $cell-empty-hover: #dddddd;
 $cell-player-red: #801515;
 $cell-player-blue: #231858;
+$error-color: #ff0000;
 
 .piece {
+	background: $cell-empty;
+	border-radius: 50%;
 	border: none;
-  background: #dddddd;
-  height: 80px;
-  width: 80px;
-  border-radius: 50%;
+	color: #333;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 12px;
+	height: 80px;
+	margin: 10px auto;
+	outline: none;
+	padding: 0;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	width: 80px;
 }
 
 .piece-color-red {
@@ -26,10 +37,14 @@ $cell-player-blue: #231858;
 }
 
 .connect-container {
-	width: 976px
+	width: 976px;
 }
 
 
 .piece-hover {
 	background-color: $cell-empty-hover;
+}
+
+#error h4{
+	color: $error-color;
 }

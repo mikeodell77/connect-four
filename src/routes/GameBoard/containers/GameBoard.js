@@ -9,7 +9,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   grid: state.gameboard.grid,
-  currentPlayer: state.gameboard.currentPlayer
+  currentPlayer: state.gameboard.currentPlayer,
+  message: state.gameboard.message
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)

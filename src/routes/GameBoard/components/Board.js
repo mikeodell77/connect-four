@@ -6,9 +6,19 @@ export const Board = (props) => {
 
 	const new_grid = props.grid
 
+	let message = () => {
+		if (props.message) {
+			return (
+				<div id="error">
+					<h4>{props.message}</h4>
+				</div>
+			)
+		}
+	}
+
 	let currentPlayer = () => {
 		return (
-			<h4>{props.currentPlayer}</h4>
+			<h4>{props.currentPlayer.toUpperCase()}</h4>
 		)
 	}
 	/**
@@ -41,6 +51,7 @@ export const Board = (props) => {
 
 	return (
 		<div>
+			{message()}
 			{currentPlayer()}
 			{buildGameBoard()}
 		</div>
