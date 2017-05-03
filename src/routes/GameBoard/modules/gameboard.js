@@ -1,4 +1,5 @@
 import update from 'react-addons-update';
+import Win from '../components/connectfour'
 
 // ------------------------------------
 // Constants
@@ -95,6 +96,11 @@ const ACTION_HANDLERS = {
       column[cellIndex] = pieceValue
     } else {
       message = 'There are no more slots left in this column. Please pick another column.'
+    }
+
+    // check for a winner!
+    if ( Win(newGrid) ) {
+      message = 'We have a winner!!!!'
     }
 
     console.log('Found the following open cell : ', cellIndex)
