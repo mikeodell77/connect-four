@@ -72,7 +72,8 @@ function isTopRight(grid) {
         if (col >= 0 && col < COLUMNS_NUM && row < ROWS_NUM) {
 
           let piece = grid[col][row];
-
+          console.log('Looking at grid : ', col, ' and row : ', row)
+          console.log('What is the value of this grid piece : ', piece)
           if(!piece) {
             found = 0;
           }
