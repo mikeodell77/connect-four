@@ -6,10 +6,12 @@ export default (store) => ({
 		require.ensure([], (require) => {
 			const GameBoard = require('./containers/GameBoard').default
 
-			const action = require('./modules/gameboard').actions
+			const actions = require('./modules/gameboard').actions
 			const reducer = require('./modules/gameboard').gameboardReducer
 
 			injectReducer(store, { key: 'gameboard', reducer })
+
+			store.dispatch(actions.initializeGame())
 
 			cb(null, GameBoard)
 		}, 'gameboard')

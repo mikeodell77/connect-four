@@ -7,8 +7,11 @@ import Win from '../components/connectfour'
 // export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 // export const COUNTER_DOUBLE_ASYNC = 'COUNTER_DOUBLE_ASYNC'
 export const ADD_PIECE = 'ADD_PIECE'
+export const INITIALIZE_GAME = 'INITIALIZE_GAME'
+
 export const RED = 'red'
 export const BLUE = 'blue'
+export const MAX_PIECES = 42
 
 const NEW_GRID = [
   [0,0,0,0,0,0],
@@ -37,14 +40,26 @@ export const addPiece = (columnIndex, rowIndex, player) => {
   }
 }
 
+export const initializeGame = () => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: INITIALIZE_GAME
+    })
+  }
+}
+
 export const actions = {
-  addPiece
+  addPiece,
+  initializeGame
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
+  [INITIALIZE_GAME] : (state, action) => {
+    return { ...state, grid: NEW_GRID, currentPlayer: RED, message: '', insertedPieces: 0 }
+  },
   [ADD_PIECE] : (state, action) => {
 
     // we need a deep copy of the grid, to retain
@@ -90,12 +105,9 @@ const ACTION_HANDLERS = {
       message = 'We have a winner!!!!'
     }
 
-    if ( insertedPieces === 42 ) {
+    if ( insertedPieces === MAX_PIECES ) {
       message = 'TIE'
     }
-
-    console.log('Found the following open cell : ', cellIndex)
-
 
     return { ...state, grid: newGrid, currentPlayer: nextPlayer, message: message, insertedPieces: insertedPieces }
   }
