@@ -7,7 +7,7 @@ export default (store) => ({
       const GameBoard = require('./containers/GameBoard').default
 
       const actions = require('./modules/gameboard').actions
-      const reducer = require('./modules/gameboard').gameboardReducer
+      const reducer = require('./modules/gameboard').default
 
       injectReducer(store, { key: 'gameboard', reducer })
 

@@ -13,7 +13,7 @@ export const BLUE = 'blue'
 export const MAX_PIECES = 42
 
 // newly initialized game board
-const NEW_GRID = [
+export const NEW_GRID = [
   [0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0],
@@ -31,21 +31,17 @@ const NEW_GRID = [
     returns a function for lazy evaluation. It is incredibly useful for
     creating async actions, especially when combined with redux-thunk! */
 export const addPiece = (columnIndex, rowIndex, player) => {
-  return (dispatch, getState) => {
-    dispatch({
+    return {
       type: ADD_PIECE,
       payload: { columnIndex: columnIndex, rowIndex: rowIndex, currentPlater: player }
-    })
-  }
+    }
 }
 
 // when new game is clicked, we dispatch a newly initialized game board
 export const initializeGame = () => {
-  return (dispatch, getState) => {
-    dispatch({
+    return {
       type: INITIALIZE_GAME
-    })
-  }
+    }
 }
 
 // actions available to the Gameboard
@@ -124,7 +120,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = { grid: NEW_GRID, currentPlayer: RED, insertedPieces: 0, gameover: false }
-export function gameboardReducer (state = initialState, action) {
+export default function gameboardReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
