@@ -31,17 +31,17 @@ export const NEW_GRID = [
     returns a function for lazy evaluation. It is incredibly useful for
     creating async actions, especially when combined with redux-thunk! */
 export const addPiece = (columnIndex, rowIndex, player) => {
-    return {
-      type: ADD_PIECE,
-      payload: { columnIndex: columnIndex, rowIndex: rowIndex, currentPlater: player }
-    }
+  return {
+    type: ADD_PIECE,
+    payload: { columnIndex: columnIndex, rowIndex: rowIndex, currentPlater: player }
+  }
 }
 
 // when new game is clicked, we dispatch a newly initialized game board
 export const initializeGame = () => {
-    return {
-      type: INITIALIZE_GAME
-    }
+  return {
+    type: INITIALIZE_GAME
+  }
 }
 
 // actions available to the Gameboard

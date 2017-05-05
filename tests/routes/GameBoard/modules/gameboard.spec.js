@@ -32,7 +32,7 @@ describe('(Redux Module) GameBoard', () => {
   })
 
   it('Should export a constant NEW_GRID.', () => {
-    expect(NEW_GRID).to.deep.equal(  [[0, 0, 0, 0, 0, 0],
+    expect(NEW_GRID).to.deep.equal([[0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0],
@@ -47,10 +47,14 @@ describe('(Redux Module) GameBoard', () => {
     })
 
     it('Should initialize with a state of gameboard grid.', () => {
-      expect(gameboardReducer(undefined, {})).to.deep.equal({grid: NEW_GRID, currentPlayer: RED, insertedPieces: 0, gameover: false})
+      expect(gameboardReducer(undefined, {})).to.deep.equal(
+        {
+          grid: NEW_GRID,
+          currentPlayer: RED,
+          insertedPieces: 0,
+          gameover: false
+        })
     })
-
-
   })
 
   describe('(Action Creator) increment', () => {
