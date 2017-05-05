@@ -3,60 +3,64 @@ import './Board.scss'
 import Piece from './Piece'
 
 export const Board = (props) => {
+  const new_grid = props.grid
 
-	const new_grid = props.grid
+  let message = () => {
+    if (props.message) {
+      return (
+        <div id='error'>
+          <h4>{props.message}</h4>
+        </div>
+      )
+    }
+  }
 
-	let message = () => {
-		if (props.message) {
-			return (
-				<div id="error">
-					<h4>{props.message}</h4>
-				</div>
-			)
-		}
-	}
-
-	let currentPlayer = () => {
-		return (
-			<h4>{props.currentPlayer.toUpperCase()}</h4>
-		)
-	}
+  let currentPlayer = () => {
+    let currentPlayer = ''
+    if (!props.gameover) {
+      currentPlayer = props.currentPlayer.toUpperCase()
+    }
+    return (
+      <h4>{currentPlayer}</h4>
+    )
+  }
 	/**
 	* Build out an empty board
 	**/
-	let buildGameBoard = () => {
-		return (
-				<div className="connect-container">
-					{new_grid.map((column, y) => {
-						return (
-							<div className="columns" key={`column-${y}`}>
-								{column.map((cell, x) => {
-									return (
-										<Piece
-											key={`piece-${x}-${y}`}
-											x={x}
-											y={y}
-											addPiece={props.addPiece}
-											currentPlayer={props.currentPlayer}
-											grid={props.grid}
-											insertedPieces={props.insertedPieces}
+  let buildGameBoard = () => {
+    return (
+      <div className='connect-container'>
+        {new_grid.map((column, y) => {
+          return (
+            <div className='columns' key={`column-${y}`}>
+              {column.map((cell, x) => {
+                return (
+                  <Piece
+                    key={`piece-${x}-${y}`}
+                    x={x}
+                    y={y}
+                    addPiece={props.addPiece}
+                    currentPlayer={props.currentPlayer}
+                    grid={props.grid}
+                    insertedPieces={props.insertedPieces}
+                    gameover={props.gameover}
 										/>
-									)
-								})}
-							</div>
-						)
-					})}
-				</div>
-		)
-	}
+                )
+              })}
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
 
-	return (
-		<div>
-			{message()}
-			{currentPlayer()}
-			{buildGameBoard()}
-		</div>
-	)
+  return (
+    <div>
+      {message()}
+      {currentPlayer()}
+      {buildGameBoard()}
+    </div>
+  )
 }
 
 export default Board

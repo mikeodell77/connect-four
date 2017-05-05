@@ -2,18 +2,18 @@ const MATCH_REQ = 4
 const COLUMNS_NUM = 7
 const ROWS_NUM = 6
 
-function diagonalWin(grid) {
+function diagonalWin (grid) {
   return isTopRight(grid) || isTopLeft(grid)
 }
 
-function isTopLeft(grid) {
+function isTopLeft (grid) {
   let found
   let foundPiece
   let column
 
   for (
     let baseColumn = MATCH_REQ - ROWS_NUM;
-    baseColumn < COLUMNS_NUM - (MATCH_REQ -1);
+    baseColumn < COLUMNS_NUM - (MATCH_REQ - 1);
     baseColumn++
   ) {
     found = 0
@@ -40,14 +40,12 @@ function isTopLeft(grid) {
   }
 
   return false
-
 }
 
-function isTopRight(grid) {
-
-  let found;
-  let foundPiece;
-  let col;
+function isTopRight (grid) {
+  let found
+  let foundPiece
+  let col
 
   // Here, we take successive diagonals, defined by the location of their "base",
   // meaning the column where they meet the ground.
@@ -58,36 +56,33 @@ function isTopRight(grid) {
     baseCol < COLUMNS_NUM - (MATCH_REQ - 1);
     baseCol++
   ) {
-
-      found = 0;
-      foundPiece = 0;
-      col = baseCol - 1; // Subtracting 1 to compensate for incrementing col at
+    found = 0
+    foundPiece = 0
+    col = baseCol - 1 // Subtracting 1 to compensate for incrementing col at
                          // the beginning of the loop
 
       // Here we work our way *DOWN* the current diagonal
-      for (let row = ROWS_NUM - 1; row >= 0; row--) {
-        col++;
+    for (let row = ROWS_NUM - 1; row >= 0; row--) {
+      col++
 
         // Ensure that the given column and row are on the board
-        if (col >= 0 && col < COLUMNS_NUM && row < ROWS_NUM) {
+      if (col >= 0 && col < COLUMNS_NUM && row < ROWS_NUM) {
+        let piece = grid[col][row]
 
-          let piece = grid[col][row];
+        if (!piece) {
+          found = 0
+        }
 
-          if(!piece) {
-            found = 0;
-          }
+        if (!!piece && (piece === foundPiece || !foundPiece) && (++found) === MATCH_REQ) {
+          return true
+        }
 
-          if (!!piece && (piece === foundPiece || !foundPiece) && (++found) === MATCH_REQ) {
-            return true;
-          }
-
-          foundPiece = piece;
-
+        foundPiece = piece
       }
     }
   }
 
-  return false;
+  return false
 }
 
 export default diagonalWin

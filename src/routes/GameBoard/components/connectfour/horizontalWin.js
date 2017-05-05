@@ -1,4 +1,4 @@
-function horizontalWin(grid) {
+function horizontalWin (grid) {
   const ROWS_NUM = 6
   const COLUMNS_NUM = 7
 
@@ -9,13 +9,13 @@ function horizontalWin(grid) {
     for (let y = 0; y < COLUMNS_NUM; y++) {
       let piece = grid[y][x]
 
-      if ( piece === 0 ) {
+      if (piece === 0) {
         found = 0
         foundPiece = 0
         continue
       }
 
-      if ( piece !== foundPiece ) {
+      if (piece !== foundPiece) {
         found = 1
         foundPiece = piece
         continue
@@ -23,7 +23,7 @@ function horizontalWin(grid) {
 
       found++
 
-      if ( found >= 4 ) {
+      if (found >= 4) {
         return true // nailed it!
       }
     }

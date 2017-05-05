@@ -1,4 +1,4 @@
-import update from 'react-addons-update';
+import update from 'react-addons-update'
 import Win from '../components/connectfour'
 
 // ------------------------------------
@@ -13,20 +13,20 @@ export const RED = 'red'
 export const BLUE = 'blue'
 export const MAX_PIECES = 42
 
+// newly initialized game board
 const NEW_GRID = [
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0]
+  [0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0]
 ]
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-
 
 /*  This is a thunk, meaning it is a function that immediately
     returns a function for lazy evaluation. It is incredibly useful for
@@ -40,6 +40,7 @@ export const addPiece = (columnIndex, rowIndex, player) => {
   }
 }
 
+// when new game is clicked, we dispatch a newly initialized game board
 export const initializeGame = () => {
   return (dispatch, getState) => {
     dispatch({
@@ -48,6 +49,7 @@ export const initializeGame = () => {
   }
 }
 
+// actions available to the Gameboard
 export const actions = {
   addPiece,
   initializeGame
@@ -61,9 +63,6 @@ const ACTION_HANDLERS = {
     return { ...state, grid: NEW_GRID, currentPlayer: RED, message: '', insertedPieces: 0 }
   },
   [ADD_PIECE] : (state, action) => {
-
-    // we need a deep copy of the grid, to retain
-    // old values
     let newGrid = state.grid.map((arr) => {
       return arr.slice(0)
     })
@@ -73,6 +72,7 @@ const ACTION_HANDLERS = {
     let nextPlayer = state.currentPlayer
     let message = ''
     let insertedPieces = state.insertedPieces
+    let gameover = false
 
     /**
     * We actually want to put the 'piece' at the bottom of the colomn.
@@ -101,22 +101,24 @@ const ACTION_HANDLERS = {
     }
 
     // check for a winner!
-    if ( Win(newGrid) ) {
-      message = 'We have a winner!!!!'
+    if (Win(newGrid)) {
+      message = `We have a winner!!!! ${state.currentPlayer} wins!`
+      gameover = true
     }
 
-    if ( insertedPieces === MAX_PIECES ) {
+    if (insertedPieces === MAX_PIECES) {
       message = 'TIE'
+      gameover = true
     }
 
-    return { ...state, grid: newGrid, currentPlayer: nextPlayer, message: message, insertedPieces: insertedPieces }
+    return { ...state, grid: newGrid, currentPlayer: nextPlayer, message: message, insertedPieces: insertedPieces, gameover: gameover }
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { grid: NEW_GRID, currentPlayer: RED, insertedPieces: 0 }
+const initialState = { grid: NEW_GRID, currentPlayer: RED, insertedPieces: 0, gameover: false }
 export function gameboardReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
