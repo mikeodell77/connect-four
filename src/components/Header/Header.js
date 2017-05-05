@@ -4,7 +4,7 @@ import './Header.scss'
 
 export const Header = () => (
   <div>
-    <h1>Mike's Amazing Connect Four Game</h1>
+    <h1>Amazing Connect Four Game</h1>
     <IndexLink to='/' activeClassName='route--active'>
       Home
     </IndexLink>

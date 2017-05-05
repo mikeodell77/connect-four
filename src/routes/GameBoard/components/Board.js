@@ -3,7 +3,7 @@ import './Board.scss'
 import Piece from './Piece'
 
 export const Board = (props) => {
-  const new_grid = props.grid
+  const newGrid = props.grid
 
   let message = () => {
     if (props.message) {
@@ -21,16 +21,16 @@ export const Board = (props) => {
       currentPlayer = props.currentPlayer.toUpperCase()
     }
     return (
-      <h4>{currentPlayer}</h4>
+      <h4>Current Turn is: {currentPlayer}</h4>
     )
   }
-	/**
-	* Build out an empty board
-	**/
+  /**
+  * Build out an empty board
+  **/
   let buildGameBoard = () => {
     return (
       <div className='connect-container'>
-        {new_grid.map((column, y) => {
+        {newGrid.map((column, y) => {
           return (
             <div className='columns' key={`column-${y}`}>
               {column.map((cell, x) => {
@@ -44,7 +44,7 @@ export const Board = (props) => {
                     grid={props.grid}
                     insertedPieces={props.insertedPieces}
                     gameover={props.gameover}
-										/>
+                   />
                 )
               })}
             </div>
@@ -61,6 +61,13 @@ export const Board = (props) => {
       {buildGameBoard()}
     </div>
   )
+}
+
+Board.propTypes = {
+  grid: React.PropTypes.array,
+  message: React.PropTypes.string,
+  gameover: React.PropTypes.bool,
+  currentPlayer: React.PropTypes.string
 }
 
 export default Board

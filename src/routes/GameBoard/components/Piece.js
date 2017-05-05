@@ -12,8 +12,8 @@ export const Piece = (props) => {
 
   let cellClasses = classnames({
     'piece': true,
-    'piece-color-red': (props.grid[props.y][props.x] == 1 ? true : false),
-    'piece-color-blue': (props.grid[props.y][props.x] == 2 ? true : false)
+    'piece-color-red': (props.grid[props.y][props.x] === 1),
+    'piece-color-blue': (props.grid[props.y][props.x] === 2)
   })
 
   return (
@@ -22,14 +22,16 @@ export const Piece = (props) => {
       id={`piece-${props.x}-${props.y}`}
       onClick={(e) => handleAddPiece()}
       disabled={props.gameover}
-			 />
+   />
   )
 }
 
 Piece.propTypes = {
-  addPiece	: React.PropTypes.func.isRequired,
-  x					: React.PropTypes.number.isRequired,
-  y					: React.PropTypes.number.isRequired
+  addPiece: React.PropTypes.func.isRequired,
+  x: React.PropTypes.number.isRequired,
+  y: React.PropTypes.number.isRequired,
+  grid : React.PropTypes.array.isRequired,
+  gameover: React.PropTypes.bool
 }
 
 export default Piece

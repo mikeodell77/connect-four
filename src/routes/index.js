@@ -2,7 +2,6 @@
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import GameBoard from './GameBoard'
-import CounterRoute from './Counter'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */

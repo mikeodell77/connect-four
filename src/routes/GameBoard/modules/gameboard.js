@@ -1,4 +1,3 @@
-import update from 'react-addons-update'
 import Win from '../components/connectfour'
 
 // ------------------------------------
@@ -111,7 +110,13 @@ const ACTION_HANDLERS = {
       gameover = true
     }
 
-    return { ...state, grid: newGrid, currentPlayer: nextPlayer, message: message, insertedPieces: insertedPieces, gameover: gameover }
+    return {
+      ...state,
+      grid: newGrid,
+      currentPlayer: nextPlayer,
+      message: message,
+      insertedPieces: insertedPieces,
+      gameover: gameover }
   }
 }
 
